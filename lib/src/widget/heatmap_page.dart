@@ -87,6 +87,8 @@ class HeatMapPage extends StatelessWidget {
   /// Default to 7 (the week starts wih Sunday).
   final int weekStartsWith;
 
+  final List<String> weekDayLabels;
+
   HeatMapPage({
     Key? key,
     required this.colorMode,
@@ -103,7 +105,8 @@ class HeatMapPage extends StatelessWidget {
     this.onClick,
     this.margin,
     this.showText,
-    this.weekStartsWith = 7,
+    this.weekStartsWith = DateTime.sunday,
+    this.weekDayLabels = const [],
   })  : _dateDifferent = endDate.difference(startDate).inDays,
         maxValue = DatasetsUtil.getMaxValue(datasets),
         super(key: key);
@@ -121,7 +124,7 @@ class HeatMapPage extends StatelessWidget {
       // Get first day of week by adding cursor's value to startDate.
       DateTime firstDay = DateUtil.changeDay(startDate, datePos);
 
-      if (_localizedWeekDayLabels.isEmpty) {
+      if (weekDayLabels.isEmpty && _localizedWeekDayLabels.isEmpty) {
         // Add an empty string for the first row
         // which is used to show the 12 month labels.
         _localizedWeekDayLabels.add('');
@@ -181,7 +184,7 @@ class HeatMapPage extends StatelessWidget {
           fontSize: fontSize,
           size: size,
           fontColor: labelColor,
-          weekDayLabels: _localizedWeekDayLabels,
+          weekDayLabels: weekDayLabels.isNotEmpty ? ["", ...weekDayLabels] : _localizedWeekDayLabels,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

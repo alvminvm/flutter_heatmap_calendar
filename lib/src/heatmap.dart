@@ -95,6 +95,8 @@ class HeatMap extends StatefulWidget {
   /// Default to 7 (the week starts wih Sunday).
   final int weekStartsWith;
 
+  final List<String> weekDayLabels;
+
   const HeatMap({
     Key? key,
     required this.colorsets,
@@ -116,7 +118,8 @@ class HeatMap extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
-    this.weekStartsWith = 7,
+    this.weekStartsWith = DateTime.sunday,
+    this.weekDayLabels = const [],
   }) : super(key: key);
 
   @override
@@ -158,6 +161,7 @@ class _HeatMap extends State<HeatMap> {
           margin: widget.margin,
           showText: widget.showText,
           weekStartsWith: widget.weekStartsWith,
+          weekDayLabels: widget.weekDayLabels,
         )),
 
         // Show HeatMapColorTip if showColorTip is true.

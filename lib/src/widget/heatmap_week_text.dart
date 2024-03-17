@@ -40,6 +40,11 @@ class HeatMapWeekText extends StatelessWidget {
                 fontSize: fontSize ?? 12,
                 color: fontColor,
               ),
+              strutStyle: StrutStyle(
+                fontSize: fontSize ?? 12,
+                leading: 0,
+                forceStrutHeight: true
+              ),
             ),
           ),
       ],
